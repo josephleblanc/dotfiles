@@ -54,9 +54,9 @@ map("n", "L", ":bn<cr>", { noremap = true, silent = true })
 map("n", "<leader><leader>", "<c-^>")
 map(
   "n",
-  "<leader>wtl",
+  "<leader>Lf",
   ':lua print(vim.inspect(require("luasnip").get_snippet_filetypes()))',
-  { desc = "Check filetype seen by luasnip" }
+  { desc = "LuaSnip: Check Filetype" } -- Renamed from <leader>wtl
 )
 ---- Typst-related
 -- Open doc to watch
