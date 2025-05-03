@@ -44,8 +44,8 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.tabstop = 4
     vim.bo.shiftwidth = 4
     -- I feel like the following two lines should work but they don't
-    -- require("rust-tools").inlay_hints()
-    -- require("snacks").toggle.inlay_hints()
+    require("rust-tools").inlay_hints()
+    require("snacks").toggle.inlay_hints()
   end,
 })
 
