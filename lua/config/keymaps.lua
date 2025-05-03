@@ -69,29 +69,63 @@ map(
 -- Typst watches current buffer for changes
 map("n", "<leader>zw", ":TypstWatch<CR>", { noremap = true, silent = true, desc = "TypstWatch" })
 
--- crates.nvim
+-- crates.nvim (Note: some keys moved to avoid conflicts)
 local crates = require("crates")
 local opts = { silent = true }
 
-map("n", "<leader>ct", crates.toggle, opts)
-map("n", "<leader>cr", crates.reload, opts)
+map("n", "<leader>ct", crates.toggle, { desc = "Crates: Toggle Panel" })
+map("n", "<leader>crr", crates.reload, { desc = "Crates: Reload" }) -- Moved from <leader>cr
 
-map("n", "<leader>cv", crates.show_versions_popup, opts)
-map("n", "<leader>cf", crates.show_features_popup, opts)
-map("n", "<leader>cd", crates.show_dependencies_popup, opts)
+map("n", "<leader>cv", crates.show_versions_popup, { desc = "Crates: Show Versions" })
+map("n", "<leader>cff", crates.show_features_popup, { desc = "Crates: Show Features" }) -- Moved from <leader>cf
+map("n", "<leader>cdd", crates.show_dependencies_popup, { desc = "Crates: Show Dependencies" }) -- Moved from <leader>cd
 
-map("n", "<leader>cu", crates.update_crate, opts)
-map("v", "<leader>cu", crates.update_crates, opts)
-map("n", "<leader>cc", crates.update_all_crates, opts)
-map("n", "<leader>cU", crates.upgrade_crate, opts)
-map("v", "<leader>cU", crates.upgrade_crates, opts)
-map("n", "<leader>cC", crates.upgrade_all_crates, opts)
+map("n", "<leader>cu", crates.update_crate, { desc = "Crates: Update Crate" })
+map("v", "<leader>cu", crates.update_crates, { desc = "Crates: Update Crates (Visual)" })
+map("n", "<leader>c C", crates.update_all_crates, { desc = "Crates: Update All Crates" }) -- Moved from <leader>cc (Note the space)
+map("n", "<leader>cU", crates.upgrade_crate, { desc = "Crates: Upgrade Crate" })
+map("v", "<leader>cU", crates.upgrade_crates, { desc = "Crates: Upgrade Crates (Visual)" })
+map("n", "<leader>cUU", crates.upgrade_all_crates, { desc = "Crates: Upgrade All Crates" }) -- Moved from <leader>cC to avoid conflict
 
-map("n", "<leader>cx", crates.expand_plain_crate_to_inline_table, opts)
-map("n", "<leader>cX", crates.extract_crate_into_table, opts)
+map("n", "<leader>cx", crates.expand_plain_crate_to_inline_table, { desc = "Crates: Expand Plain Crate" })
+map("n", "<leader>cX", crates.extract_crate_into_table, { desc = "Crates: Extract Crate Table" })
 
-map("n", "<leader>cH", crates.open_homepage, opts)
-map("n", "<leader>cR", crates.open_repository, opts)
-map("n", "<leader>cD", crates.open_documentation, opts)
-map("n", "<leader>cC", crates.open_crates_io, opts)
-map("n", "<leader>cL", crates.open_lib_rs, opts)
+map("n", "<leader>cH", crates.open_homepage, { desc = "Crates: Open Homepage" })
+map("n", "<leader>cR", crates.open_repository, { desc = "Crates: Open Repository" }) -- Kept, conflicts with default Rust Code Action
+map("n", "<leader>cD", crates.open_documentation, { desc = "Crates: Open Documentation" })
+map("n", "<leader>cO", crates.open_crates_io, { desc = "Crates: Open Crates.io" }) -- Moved from <leader>cC
+map("n", "<leader>cL", crates.open_lib_rs, { desc = "Crates: Open Lib.rs" })
+
+-- Testing (Neotest)
+map("n", "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, { desc = "Test File" })
+map("n", "<leader>tT", function() require("neotest").run.run(vim.loop.cwd()) end, { desc = "Test All (cwd)" })
+map("n", "<leader>tn", function() require("neotest").run.run() end, { desc = "Test Nearest" })
+map("n", "<leader>tO", function() require("neotest").summary.toggle() end, { desc = "Test Overview/Summary Toggle" })
+map("n", "<leader>td", function() require("neotest").run.run({strategy = "dap"}) end, { desc = "Debug Nearest Test" })
+map("n", "<leader>tA", function() require("neotest").run.attach() end, { desc = "Attach to Nearest Test" })
+
+-- Debugging (DAP)
+local dap = require("dap")
+map("n", "<leader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
+map("n", "<leader>dB", function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, { desc = "Debug: Conditional Breakpoint" })
+map("n", "<leader>di", function() dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end, { desc = "Debug: Insert Log Point" })
+map("n", "<leader>dR", dap.repl.open, { desc = "Debug: Open REPL" }) -- Note: <leader>dr is Rust Debuggables
+map("n", "<leader>dj", dap.down, { desc = "Debug: Stack Down" })
+map("n", "<leader>dk", dap.up, { desc = "Debug: Stack Up" })
+map("n", "<leader>dn", dap.step_into, { desc = "Debug: Step Into" })
+map("n", "<leader>du", dap.step_out, { desc = "Debug: Step Out" })
+map("n", "<leader>dv", dap.step_over, { desc = "Debug: Step Over" })
+-- <leader>cd is already mapped to dap.continue
+map("n", "<leader>drc", dap.run_to_cursor, { desc = "Debug: Run To Cursor" })
+map("n", "<leader>dK", dap.terminate, { desc = "Debug: Terminate/Kill Session" })
+
+-- Rust (rustaceanvim) specific actions
+map("n", "<leader>rr", function() vim.cmd.RustLsp("runnables") end, { desc = "Rust: Runnables" })
+-- <leader>dr is already mapped to Rust Debuggables by LazyVim defaults
+map("n", "<leader>ra", function() vim.cmd.RustLsp("codeAction") end, { desc = "Rust: Code Action (Replaces <leader>ca)" })
+map("n", "<leader>re", function() vim.cmd.RustLsp("expandMacro") end, { desc = "Rust: Expand Macro" })
+map("n", "<leader>rj", function() vim.cmd.RustLsp("joinLines") end, { desc = "Rust: Join Lines" })
+map("n", "<leader>rh", function() vim.cmd.RustLsp("hover") end, { desc = "Rust: Hover Actions" })
+map("n", "<leader>rm", function() vim.cmd.RustLsp("parentModule") end, { desc = "Rust: Parent Module" })
+map("n", "<leader>rx", function() vim.cmd.RustLsp("ssr") end, { desc = "Rust: Structural Search Replace" })
+-- <leader>uh is mapped by Snacks to Toggle Inlay Hints

@@ -21,6 +21,8 @@ return {
       return opts -- Return the modified options
     end,
   },
+
+  -- Ensure gitsigns is enabled (LazyVim default, but good to be explicit)
   { "lewis6991/gitsigns.nvim", enabled = true },
 
   -- You can add other custom plugin configurations below this line
