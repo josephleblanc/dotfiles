@@ -74,18 +74,18 @@ local crates = require("crates")
 local opts = { silent = true }
 
 map("n", "<leader>ct", crates.toggle, { desc = "Crates: Toggle Panel" })
-map("n", "<leader>crr", crates.reload, { desc = "Crates: Reload" }) -- Moved from <leader>cr
+map("n", "<leader>pr", crates.reload, { desc = "Crates: Reload" }) -- Renamed from <leader>crr
 
 map("n", "<leader>cv", crates.show_versions_popup, { desc = "Crates: Show Versions" })
-map("n", "<leader>cff", crates.show_features_popup, { desc = "Crates: Show Features" }) -- Moved from <leader>cf
-map("n", "<leader>cdd", crates.show_dependencies_popup, { desc = "Crates: Show Dependencies" }) -- Moved from <leader>cd
+map("n", "<leader>pf", crates.show_features_popup, { desc = "Crates: Show Features" }) -- Renamed from <leader>cff
+map("n", "<leader>pd", crates.show_dependencies_popup, { desc = "Crates: Show Dependencies" }) -- Renamed from <leader>cdd
 
 map("n", "<leader>cu", crates.update_crate, { desc = "Crates: Update Crate" })
 map("v", "<leader>cu", crates.update_crates, { desc = "Crates: Update Crates (Visual)" })
 map("n", "<leader>c C", crates.update_all_crates, { desc = "Crates: Update All Crates" }) -- Moved from <leader>cc (Note the space)
 map("n", "<leader>cU", crates.upgrade_crate, { desc = "Crates: Upgrade Crate" })
 map("v", "<leader>cU", crates.upgrade_crates, { desc = "Crates: Upgrade Crates (Visual)" })
-map("n", "<leader>cUU", crates.upgrade_all_crates, { desc = "Crates: Upgrade All Crates" }) -- Moved from <leader>cC to avoid conflict
+map("n", "<leader>pU", crates.upgrade_all_crates, { desc = "Crates: Upgrade All Crates" }) -- Renamed from <leader>cUU
 
 map("n", "<leader>cx", crates.expand_plain_crate_to_inline_table, { desc = "Crates: Expand Plain Crate" })
 map("n", "<leader>cX", crates.extract_crate_into_table, { desc = "Crates: Extract Crate Table" })
@@ -116,7 +116,7 @@ map("n", "<leader>dn", dap.step_into, { desc = "Debug: Step Into" })
 map("n", "<leader>du", dap.step_out, { desc = "Debug: Step Out" })
 map("n", "<leader>dv", dap.step_over, { desc = "Debug: Step Over" })
 -- <leader>cd is already mapped to dap.continue
-map("n", "<leader>drc", dap.run_to_cursor, { desc = "Debug: Run To Cursor" })
+map("n", "<leader>dC", dap.run_to_cursor, { desc = "Debug: Run To Cursor" }) -- Renamed from <leader>drc
 map("n", "<leader>dK", dap.terminate, { desc = "Debug: Terminate/Kill Session" })
 
 -- Rust (rustaceanvim) specific actions
