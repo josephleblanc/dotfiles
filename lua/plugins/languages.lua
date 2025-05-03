@@ -41,19 +41,4 @@ return {
   --     },
   --   },
   -- },
-
-  -- Debugger configuration
-  {
-    "mfussenegger/nvim-dap",
-    config = function()
-      require("dap").adapters.codelldb = {
-        type = "server",
-        port = "${port}",
-        executable = {
-          command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
-          args = { "--port", "${port}" },
-        },
-      }
-    end,
-  },
 }
