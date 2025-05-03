@@ -1,0 +1,27 @@
+return {
+  "https://github.com/folke/noice.nvim",
+  opts = {
+    table.insert(opts.routes, {
+      filter = {
+        kind = "lua_error",
+        find = "Error while evaluating functionNode@1 for snippet", -- skip all lsp progress containing the word workspace
+      },
+      opts = { skip = true },
+    }),
+  },
+  -- opts = {
+  --   routes = {
+  --     {
+  --       filter = {
+  --         any = {
+  --           { find = ".*Error while evaluating functionNode@1 for snippet '(%d)mytrig':.*" },
+  --           { find = "attempt to index field 'captures' (a nil value)." },
+  --           { find = ":h luasnip-docstring for more info" },
+  --         },
+  --         event = "msg_show",
+  --       },
+  --       opts = { skip = true },
+  --     },
+  --   },
+  -- },
+}

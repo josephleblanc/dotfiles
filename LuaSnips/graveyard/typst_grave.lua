@@ -1,0 +1,124 @@
+------ A record of all the failed attempts by AIs to fix my problems
+--- making a dynamic table
+-- s(
+--   { trig = "mtable", wordTrig = false, regTrig = false, snippetType = "autosnippet" },
+--   f(function(_, snip) -- Removed snip parameter as it's not used
+--     local num_rows = 5 -- Hardcoded num_rows for simplified trigger
+--     local nodes = {
+--       t("#table(\n  columns: 3,\n  table.header(\n    ["),
+--       i(1, "Header 1"),
+--       t("], ["),
+--       i(2, "Header 2"),
+--       t("], ["),
+--       i(3, "Header 3"),
+--       t("]\n  ),\n"),
+--     }
+--
+--     for row_num = 1, num_rows do
+--       local row_nodes = {
+--         t("  table.row(\n    ["),
+--         i(4 + (row_num - 1) * 3, " "),
+--         t("], ["),
+--         i(5 + (row_num - 1) * 3, " "),
+--         t("], ["),
+--         i(6 + (row_num - 1) * 3, " "),
+--         t("]\n  ),\n"),
+--       }
+--       for _, node in ipairs(row_nodes) do
+--         table.insert(nodes, node)
+--       end
+--     end
+--
+--     table.insert(nodes, t(")\n"))
+--     return sn(nil, nodes)
+--   end)
+-- ),
+-- mktable example
+-- -- works
+--   s(
+--     { trig = "mktable", wordTrig = false, regTrig = false, snippetType = "autosnippet" },
+--     fmta(
+--       [[
+-- #table(
+--   columns: 3,
+--   table.header(
+--     [<>],
+--     [<>],
+--     [<>]
+--   ),
+--   table.row(
+--     [<>],
+--     [<>],
+--     [<>]
+--   ),
+--   table.row(
+--     [<>],
+--     [<>],
+--     [<>]
+--   ),
+--   table.row(
+--     [<>],
+--     [<>],
+--     [<>]
+--   ),
+-- )
+--     ]],
+--       {
+--         i(1, "Header 1"),
+--         i(2, "Header 2"),
+--         i(3, "Header 3"),
+--         i(4, "Row 1 Col 1"),
+--         i(5, "Row 1 Col 2"),
+--         i(6, "Row 1 Col 3"),
+--         i(7, "Row 2 Col 1"),
+--         i(8, "Row 2 Col 2"),
+--         i(9, "Row 2 Col 3"),
+--         i(10, "Row 3 Col 1"),
+--         i(11, "Row 3 Col 2"),
+--         i(12, "Row 3 Col 3"),
+--       }
+--     )
+--   ),
+-- mktable test for fixed repeating number of rows
+-- does not work
+--   s(
+--     { trig = "mktable", wordTrig = false, regTrig = false, snippetType = "autosnippet" },
+--     fmta(
+--       [[
+-- #table(
+--   columns: 3,
+--   table.header(
+--     [<>],
+--     [<>],
+--     [<>]
+--   ),
+--   <> -- Rows will be inserted here
+-- )
+--     ]],
+--       {
+--         i(1, "Header 1"),
+--         i(2, "Header 2"),
+--         i(3, "Header 3"),
+--         f(function() -- Function node to insert rows string
+--           return generate_rows_string(3) -- Generate 3 rows
+--         end),
+--       }
+--     )
+--   ),
+-- Table: Quick nx3 table
+-- s(
+--   { trig = "mktable", wordTrig = false, regTrig = false, snippetType = "autosnippet" },
+--   sn(nil, {
+--     t("#table(\n  columns: 3,\n  table.header(\n    ["),
+--     i(1, "Header 1"),
+--     t("],\n    ["),
+--     i(2, "Header 2"),
+--     t("],\n    ["),
+--     i(3, "Header 3"),
+--     t("]\n  ),\n"),
+--     f(function()
+--       return generate_rows_nodes(3) -- Insert row nodes here (single text node per row)
+--     end),
+--     t("\n)"), -- Closing parenthesis for #table
+--   })
+-- ),
