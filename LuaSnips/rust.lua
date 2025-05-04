@@ -276,53 +276,82 @@ impl Default for <> {
   }, t(".fold(0, |acc, x| acc + x)")),
 
   -- ===== Functional Patterns =====
-  s({
-    trig = ";map_or",
-    dscr = "Option/Result map_or",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, t(".map_or(") .. i(1, "default") .. t(", |") .. i(2, "x") .. t("| ") .. i(3) .. t(")")),
+  -- ===== Functional Patterns =====
+  s(
+    {
+      trig = ";map_or",
+      dscr = "Option/Result map_or",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta([[.map_or(<>, |<>| <>)]], {
+      i(1, "default"),
+      i(2, "x"),
+      i(3),
+    })
+  ),
 
-  s({
-    trig = ";map_or_else",
-    dscr = "Option/Result map_or_else",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, t(".map_or_else(|| ") .. i(1, "default") .. t(", |") .. i(2, "x") .. t("| ") .. i(3) .. t(")")),
+  s(
+    {
+      trig = ";map_or_else",
+      dscr = "Option/Result map_or_else",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta([[.map_or_else(|| <>, |<>| <>)]], {
+      i(1, "default"),
+      i(2, "x"),
+      i(3),
+    })
+  ),
 
-  s({
-    trig = ";ok_or",
-    dscr = "Option to Result conversion",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, t(".ok_or(") .. i(1, "Error") .. t(")")),
+  s(
+    {
+      trig = ";ok_or",
+      dscr = "Option to Result conversion",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta([[.ok_or(<>)]], {
+      i(1, "Error"),
+    })
+  ),
 
+  s(
+    {
+      trig = ";flat_map",
+      dscr = "Iterator flat_map",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta([[.flat_map(|<>| <>)]], {
+      i(1, "x"),
+      i(2),
+    })
+  ),
   s({
-    trig = ";flat_map",
-    dscr = "Iterator flat_map",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, t(".flat_map(|") .. i(1, "x") .. t("| ") .. i(2) .. t(")")),
-
-  s({
-    trig = ";flatten",
+    trig = ".flt ",
     dscr = "Iterator flatten",
     regTrig = false,
     priority = 100,
     snippetType = "autosnippet",
   }, t(".flatten()")),
-
-  s({
-    trig = ";chain",
-    dscr = "Iterator chain",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, t(".chain(") .. i(1, "iter") .. t(")")),
+  s(
+    {
+      trig = ";chain",
+      dscr = "Iterator chain",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta([[.chain(<>)]], {
+      i(1, "iter"),
+    })
+  ),
 
   s(
     {
@@ -332,15 +361,12 @@ impl Default for <> {
       priority = 100,
       snippetType = "autosnippet",
     },
-    fmta(
-      [[|<>: <>| ->> <> { <> }]],
-      {
-        i(1, "x"),
-        i(2, "Type"),
-        i(3, "ReturnType"),
-        i(4),
-      }
-    )
+    fmta([[|<>: <>| ->> <> { <> }]], {
+      i(1, "x"),
+      i(2, "Type"),
+      i(3, "ReturnType"),
+      i(4),
+    })
   ),
 
   s(
@@ -353,9 +379,9 @@ impl Default for <> {
     },
     fmta(
       [[
-    let <> = <>?;
-    <>
-    ]],
+     let <> = <>?;
+     <>
+     ]],
       {
         i(1, "value"),
         i(2),
@@ -364,14 +390,19 @@ impl Default for <> {
     )
   ),
 
-  s({
-    trig = ";compose",
-    dscr = "Function composition",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, t(".and_then(|") .. i(1, "x") .. t("| ") .. i(2) .. t(")")),
-
+  s(
+    {
+      trig = ";compose",
+      dscr = "Function composition",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta([[.and_then(|<>| <>)]], {
+      i(1, "x"),
+      i(2),
+    })
+  ),
   s(
     {
       trig = ";match_guard",
@@ -382,8 +413,8 @@ impl Default for <> {
     },
     fmta(
       [[
-    <> if <> =>> <>,
-    ]],
+     <> if <> =>> <>,
+     ]],
       {
         i(1, "Pattern"),
         i(2, "condition"),
@@ -402,13 +433,13 @@ impl Default for <> {
     },
     fmta(
       [[
-    fn <><<F>>(f: F) ->> <>
-    where
-        F: Fn(<>) ->> <>,
-    {
-        <>
-    }
-    ]],
+     fn <><<F>>(f: F) ->> <>
+     where
+         F: Fn(<>) ->> <>,
+     {
+         <>
+     }
+     ]],
       {
         i(1, "higher_order_fn"),
         i(2, "ReturnType"),
