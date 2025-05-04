@@ -194,6 +194,180 @@ impl Default for <> {
     fn default() ->> Self { -- Escaped ->> here
         <>
     }
+  -- ===== New Error Handling Snippets =====
+  s({
+    trig = ";unwrap",
+    dscr = "unwrap with expect message",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, fmta([[.unwrap_or_else(|<>| panic!("<>", <>))]], {
+    i(1, "e"),
+    i(2, "Error: {}"),
+    r(1),
+  })),
+
+  s({
+    trig = ";err",
+    dscr = "Custom error type",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, fmta([[
+#[derive(Debug, thiserror::Error)]
+enum <> {
+    #[error("<>")]
+    <>(<>),
+}
+]], {
+  i(1, "Error"),
+  i(2, "error message"),
+  i(3, "Variant"),
+  i(4, "String"),
+})),
+
+  -- ===== New Async Patterns =====
+  s({
+    trig = ";spawn",
+    dscr = "Spawn async task",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, fmta([[tokio::spawn(async { <> });]], {
+    i(1),
+  })),
+
+  -- ===== New Testing Snippets =====
+  s({
+    trig = ";bench",
+    dscr = "Benchmark test",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, fmta([[
+#[bench]
+fn <>() {
+    <>
+}
+]], {
+  i(1, "bench_name"),
+  i(2),
+})),
+
+  -- ===== New Common Traits =====
+  s({
+    trig = ";from",
+    dscr = "From trait implementation",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, fmta([[
+impl From<<>> for <> {
+    fn from(value: <>) ->> Self {
+        <>
+    }
+}
+]], {
+  i(1, "FromType"),
+  i(2, "ToType"),
+  r(1),
+  i(3),
+})),
+
+  -- ===== New Macros =====
+  s({
+    trig = ";vec",
+    dscr = "Vec with capacity",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, fmta([[Vec::with_capacity(<>)<>]], {
+    i(1, "capacity"),
+    i(2),
+  })),
+
+  -- ===== New Documentation =====
+  s({
+    trig = ";mod",
+    dscr = "Module documentation",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, fmta([[
+//! <>
+//! 
+//! <>
+]], {
+  i(1, "Module summary"),
+  i(2, "Detailed description"),
+})),
+
+  -- ===== New Iterator Patterns =====
+  s({
+    trig = ";find",
+    dscr = "Iterator find",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, fmta([[.find(|<>| <>)]], {
+    i(1, "x"),
+    i(2),
+  })),
+
+  -- ===== New Smart Pointers =====
+  s({
+    trig = ";arc",
+    dscr = "Arc with Mutex",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, fmta([[Arc::new(Mutex::new(<>))]], {
+    i(1),
+  })),
+
+  -- ===== New Serde Patterns =====
+  s({
+    trig = ";serde",
+    dscr = "Serde derives",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, t("#[derive(serde::Serialize, serde::Deserialize)]")),
+
+  -- ===== New Builder Pattern =====
+  s({
+    trig = ";builder",
+    dscr = "Builder pattern",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, fmta([[
+impl <> {
+    pub fn builder() ->> <>Builder {
+        <>Builder::default()
+    }
+}
+
+#[derive(Default)]
+pub struct <>Builder {
+    <>
+}
+
+impl <>Builder {
+    pub fn build(self) ->> <> {
+        <>
+    }
+}
+]], {
+  i(1, "Type"),
+  r(1),
+  r(1),
+  r(1),
+  i(2),
+  r(1),
+  r(1),
+  i(3),
+})),
 }
 ]],
       {
@@ -205,9 +379,9 @@ impl Default for <> {
 
   -- ===== Lifetime Patterns =====
   s({
-    trig = ";lt(.)", -- Captures one character after ;lt
-    dscr = "Lifetime parameter with custom letter",
-    regTrig = true, -- Enable regex trigger
+    trig = ";lt([a-z])", -- Only matches lowercase letters after ;lt
+    dscr = "Lifetime parameter with lowercase letter",
+    regTrig = true,
     priority = 100,
     snippetType = "autosnippet",
   }, {
@@ -1049,3 +1223,13 @@ impl Default for <> {
     }
   ),
 }
+  s({
+    trig = ";ltB",
+    dscr = "Lifetime bound (where T: 'a)",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, fmta([[where <>: '<>,]], {
+    i(1, "T"),
+    i(2, "a"),
+  })),
