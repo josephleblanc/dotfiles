@@ -1,6 +1,6 @@
 return {
   "L3MON4D3/LuaSnip",
-  lazy = false,
+  lazy = true,
   build = (not LazyVim.is_win())
       and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
     or nil,
@@ -8,7 +8,7 @@ return {
   config = function()
     -- Load local snippets first
     require("luasnip.loaders.from_lua").lazy_load({
-      paths = vim.fn.stdpath("config") .. "/LuaSnips", -- Ensure this path points correctly to your LuaSnips directory
+      paths = { vim.fn.stdpath("config") .. "/LuaSnips" }, -- Ensure this path points correctly to your LuaSnips directory
     })
 
     -- Load snippets from friendly-snippets AFTER your custom ones

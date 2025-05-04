@@ -1,13 +1,11 @@
 return {
   "https://github.com/folke/noice.nvim",
   opts = {
-    table.insert(opts.routes, {
-      filter = {
-        kind = "lua_error",
-        find = "Error while evaluating functionNode@1 for snippet", -- skip all lsp progress containing the word workspace
-      },
-      opts = { skip = true },
-    }),
+    filter = {
+      kind = "lua_error",
+      find = "Error while evaluating functionNode@1 for snippet", -- skip all lsp progress containing the word workspace
+    },
+    opts = { skip = true },
   },
   -- opts = {
   --   routes = {

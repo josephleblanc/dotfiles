@@ -13,8 +13,8 @@ return {
       "bash-language-server",
       "clangd",
       "gopls",
-      "latex-lsp", -- LaTeX LSP (you might need to install "texlab" or similar separately)
-      "markdown-language-server", -- Markdown LSP (for README files)
+      "texlab", -- LaTeX LSP (you might need to install "texlab" or similar separately)
+      "marksman", -- Markdown LSP (for README files)
       "pyright",
       "rust-analyzer",
       "typst-lsp",

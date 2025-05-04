@@ -4,12 +4,11 @@ return {
   optional = true,
   opts = {
     snippets = {
-      -- expand = function(snippet)
-      --   require("luasnip").lsp_expand(snippet)
-      -- end,
-      preset = "luasnip",
+      -- expand = function(snippet) -- << REMOVE THIS LINE
+      --  require("luasnip").lsp_expand(snippet) -- << REMOVE THIS LINE
+      -- end, -- << REMOVE THIS LINE
+      preset = "luasnip", -- Keep only this line inside snippets = { ... }
     },
-
     completion = { ghost_text = { enabled = false } },
   },
 }

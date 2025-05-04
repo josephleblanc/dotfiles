@@ -12,3 +12,7 @@ opt.expandtab = true
 opt.history = 1000
 opt.undolevels = 10000
 opt.undoreload = 10000
+
+vim.diagnostic.config({
+  virtual_text = false,
+})
