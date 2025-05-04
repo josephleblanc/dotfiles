@@ -122,30 +122,58 @@ return {
             vim.keymap.set("n", "<leader>ra", function()
               vim.cmd.RustLsp("codeAction")
             end, { desc = "Rust: Code Action (Replaces <leader>ca)" })
-            -- Grouped Code Action
-            -- :RustLsp expandMacro
-            vim.keymap.set("n", "<leader>re", function()
+            ---------- Grouped Code Action -------------
+            ---
+            ----------- Expand Macro -------------------
+            vim.keymap.set("n", "<leader>rem", function()
               vim.cmd.RustLsp("expandMacro")
             end, { desc = "Rust: Expand Macro" })
-            vim.keymap.set("n", "<leader>rj", function()
+            ---
+            ------------ Rebuild Proc Macros -----------
+            vim.keymap.set("n", "<leader>rpm", function()
+              vim.cmd.RustLsp("rebuildProcMacros")
+            end, { desc = "Rust: Rebuild Proc Macros" })
+            ---
+            --------------------------------------------
+            vim.keymap.set("n", "<leader>j", function()
               vim.cmd.RustLsp("joinLines")
             end, { desc = "Rust: Join Lines" })
+            ---
+            ----------- moveItem {up|down} -------------
+            --- up
+            vim.keymap.set("n", "<M-k>", function()
+              vim.cmd.RustLsp({ "moveItem", "up" })
+            end, { desc = "Rust: Move Item Up" })
+            --- down
+            vim.keymap.set("n", "<M-j>", function()
+              vim.cmd.RustLsp({ "moveItem", "down" })
+            end, { desc = "Rust: Move Item Up" })
+            ---
+            --------------------------------------------
             vim.keymap.set("n", "<leader>rh", function()
               vim.cmd.RustLsp("hover")
             end, { desc = "Rust: Hover Actions" })
+            ---
+            --------------------------------------------
             vim.keymap.set("n", "<leader>rm", function()
               vim.cmd.RustLsp("parentModule")
             end, { desc = "Rust: Parent Module" })
+            ---
+            --------------------------------------------
             vim.keymap.set("n", "<leader>rx", function()
               vim.cmd.RustLsp("ssr")
             end, { desc = "Rust: Structural Search Replace" })
+            ---
             -- <leader>uh is mapped by Snacks to Toggle Inlay Hints
             vim.keymap.set("n", "<leader>rd", function()
               vim.cmd.RustLsp("openDocs")
             end, { desc = "Rust: Open Documentation" })
+            ---
+            --------------------------------------------
             vim.keymap.set("n", "<leader>rD", function()
               vim.cmd.RustLsp("openCargo")
             end, { desc = "Rust: Open Cargo.toml" })
+            ---
           end,
           default_settings = {
             ["rust-analyzer"] = {
