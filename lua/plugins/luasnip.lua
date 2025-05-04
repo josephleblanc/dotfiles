@@ -1,6 +1,6 @@
 return {
   "L3MON4D3/LuaSnip",
-  lazy = true,
+  lazy = false,
   build = (not LazyVim.is_win())
       and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
     or nil,
@@ -14,10 +14,10 @@ return {
   },
   config = function()
     -- Load local snippets first
-    require("luasnip.loaders.from_lua").lazy_load({
-      paths = vim.fn.stdpath("config").."/LuaSnips"
-    })
-    
+    -- require("luasnip.loaders.from_lua").lazy_load({
+    --   paths = vim.fn.stdpath("config") .. "/LuaSnips",
+    -- })
+
     require("luasnip").config.setup({
       update_events = "TextChanged,TextChangedI",
       enable_autosnippets = true,
@@ -25,10 +25,10 @@ return {
       ext_opts = {
         [require("luasnip.util.types").choiceNode] = {
           active = {
-            virt_text = { { "●", "DiagnosticWarn" } }
-          }
-        }
-      }
+            virt_text = { { "●", "DiagnosticWarn" } },
+          },
+        },
+      },
     })
 
     vim.cmd([[
@@ -41,7 +41,7 @@ return {
   opts = {
     history = true,
     delete_check_events = "TextChanged",
-  }
+  },
 }
 
 -- return {
