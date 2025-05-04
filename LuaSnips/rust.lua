@@ -191,12 +191,16 @@ return {
 
   -- ===== Lifetime Patterns =====
   s({
-    trig = ";lt",
-    dscr = "Lifetime parameter",
-    regTrig = false,
+    trig = ";lt(.)",  -- Captures one character after ;lt
+    dscr = "Lifetime parameter with custom letter",
+    regTrig = true,   -- Enable regex trigger
     priority = 100,
     snippetType = "autosnippet",
-  }, t("<'a>")),
+  }, {
+    f(function(_, snip)
+      return string.format("<'%s>", snip.captures[1])
+    end)
+  }),
 
   -- ===== Iterator Patterns =====
   s(
