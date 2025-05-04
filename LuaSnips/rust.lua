@@ -275,6 +275,150 @@ impl Default for <> {
     snippetType = "autosnippet",
   }, t(".fold(0, |acc, x| acc + x)")),
 
+  -- ===== Functional Patterns =====
+  s({
+    trig = ";map_or",
+    dscr = "Option/Result map_or",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, t(".map_or(") .. i(1, "default") .. t(", |") .. i(2, "x") .. t("| ") .. i(3) .. t(")")),
+
+  s({
+    trig = ";map_or_else",
+    dscr = "Option/Result map_or_else",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, t(".map_or_else(|| ") .. i(1, "default") .. t(", |") .. i(2, "x") .. t("| ") .. i(3) .. t(")")),
+
+  s({
+    trig = ";ok_or",
+    dscr = "Option to Result conversion",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, t(".ok_or(") .. i(1, "Error") .. t(")")),
+
+  s({
+    trig = ";flat_map",
+    dscr = "Iterator flat_map",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, t(".flat_map(|") .. i(1, "x") .. t("| ") .. i(2) .. t(")")),
+
+  s({
+    trig = ";flatten",
+    dscr = "Iterator flatten",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, t(".flatten()")),
+
+  s({
+    trig = ";chain",
+    dscr = "Iterator chain",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, t(".chain(") .. i(1, "iter") .. t(")")),
+
+  s(
+    {
+      trig = ";closure",
+      dscr = "Closure with type annotation",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[|<>: <>| ->> <> { <> }]],
+      {
+        i(1, "x"),
+        i(2, "Type"),
+        i(3, "ReturnType"),
+        i(4),
+      }
+    )
+  ),
+
+  s(
+    {
+      trig = ";do",
+      dscr = "Monadic do notation (using ? operator)",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[
+    let <> = <>?;
+    <>
+    ]],
+      {
+        i(1, "value"),
+        i(2),
+        i(3),
+      }
+    )
+  ),
+
+  s({
+    trig = ";compose",
+    dscr = "Function composition",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, t(".and_then(|") .. i(1, "x") .. t("| ") .. i(2) .. t(")")),
+
+  s(
+    {
+      trig = ";match_guard",
+      dscr = "Match arm with guard",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[
+    <> if <> =>> <>,
+    ]],
+      {
+        i(1, "Pattern"),
+        i(2, "condition"),
+        i(3),
+      }
+    )
+  ),
+
+  s(
+    {
+      trig = ";hof",
+      dscr = "Higher order function",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[
+    fn <><<F>>(f: F) ->> <>
+    where
+        F: Fn(<>) ->> <>,
+    {
+        <>
+    }
+    ]],
+      {
+        i(1, "higher_order_fn"),
+        i(2, "ReturnType"),
+        i(3, "InputType"),
+        i(4, "OutputType"),
+        i(5),
+      }
+    )
+  ),
+
   -- ===== Other Common Patterns =====
   s(
     {
