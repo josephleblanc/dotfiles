@@ -105,4 +105,5 @@ return {
       }
     )
   ),
+  s({ trig = ";lt", dscr = "Lifetime parameter" }, t("<'a>")),
 }
