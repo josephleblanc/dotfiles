@@ -275,6 +275,146 @@ impl Default for <> {
     snippetType = "autosnippet",
   }, t(".fold(0, |acc, x| acc + x)")),
 
+  -- ===== Iterator Patterns =====
+  s(
+    {
+      trig = ";collect",
+      dscr = "Collect iterator into collection",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[.collect::<<>><<>>()]],
+      {
+        i(1, "Vec"),
+        i(2, "<T>"),
+      }
+    )
+  ),
+
+  s(
+    {
+      trig = ";partition",
+      dscr = "Partition iterator into two collections",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[.partition(|<>| <>)]],
+      {
+        i(1, "x"),
+        i(2),
+      }
+    )
+  ),
+
+  s(
+    {
+      trig = ";take_while",
+      dscr = "Take while predicate is true",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[.take_while(|<>| <>)]],
+      {
+        i(1, "x"),
+        i(2),
+      }
+    )
+  ),
+
+  s(
+    {
+      trig = ";skip_while",
+      dscr = "Skip while predicate is true",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[.skip_while(|<>| <>)]],
+      {
+        i(1, "x"),
+        i(2),
+      }
+    )
+  ),
+
+  s(
+    {
+      trig = ";zip",
+      dscr = "Zip with another iterator",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[.zip(<>.into_iter())]],
+      {
+        i(1, "other_iter"),
+      }
+    )
+  ),
+
+  s(
+    {
+      trig = ";enumerate",
+      dscr = "Add index to iterator",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    t(".enumerate()")
+  ),
+
+  s(
+    {
+      trig = ";rev",
+      dscr = "Reverse iterator",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    t(".rev()")
+  ),
+
+  s(
+    {
+      trig = ";cycle",
+      dscr = "Cycle iterator endlessly",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    t(".cycle()")
+  ),
+
+  s(
+    {
+      trig = ";peekable",
+      dscr = "Make iterator peekable",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    t(".peekable()")
+  ),
+
+  s(
+    {
+      trig = ";fuse",
+      dscr = "Fuse iterator after first None",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    t(".fuse()")
+  ),
+
   -- ===== Functional Patterns =====
   -- ===== Functional Patterns =====
   s(
