@@ -243,37 +243,74 @@ impl Default for <> {
     )
   ),
   -- ===== Homomorphic Patterns =====
-  s({
-    trig = ";map",
-    dscr = "Iterator map",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, t(".map(|x| x)")),
+  s(
+    {
+      trig = ";map",
+      dscr = "Iterator map",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[.map(|<>| <>)]],
+      {
+        i(1, "x"),
+        i(2),
+      }
+    )
+  ),
 
-  s({
-    trig = ";and_then",
-    dscr = "Iterator and_then",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, t(".and_then(|x| x)")),
+  s(
+    {
+      trig = ";and_then",
+      dscr = "Iterator and_then",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[.and_then(|<>| <>)]],
+      {
+        i(1, "x"),
+        i(2),
+      }
+    )
+  ),
 
-  s({
-    trig = ";filter",
-    dscr = "Iterator filter",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, t(".filter(|x| x)")),
+  s(
+    {
+      trig = ";filter",
+      dscr = "Iterator filter",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[.filter(|<>| <>)]],
+      {
+        i(1, "x"),
+        i(2),
+      }
+    )
+  ),
 
-  s({
-    trig = ";fold",
-    dscr = "Iterator fold",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, t(".fold(0, |acc, x| acc + x)")),
+  s(
+    {
+      trig = ";fold",
+      dscr = "Iterator fold",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[.fold(<>, |<>| <>)]],
+      {
+        i(1, "0"),
+        i(2, "acc, x"),
+        i(3, "acc + x"),
+      }
+    )
+  ),
 
   -- ===== Iterator Patterns =====
   s(
