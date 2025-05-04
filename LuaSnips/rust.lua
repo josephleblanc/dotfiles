@@ -409,4 +409,41 @@ return {
     )
   ),
   s({ trig = ";lt", dscr = "Lifetime parameter" }, t("<'a>")),
+
+  -- Dynamic struct with variable number of fields
+  s(
+    {
+      trig = ";struct",
+      dscr = "Struct with N fields",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[
+      struct <> {
+          <>
+      }
+      ]],
+      {
+        i(1, "StructName"),
+        d(2, function(args)
+          local count = tonumber(args[1][1]) or 2  -- Default to 2 fields if no number provided
+          local nodes = {}
+          for j = 1, count do
+            local field_node = fmta("    <>: <>,", {
+              i(1, "field_" .. j),
+              i(2, "Type"),
+            })
+            table.insert(nodes, field_node)
+            -- Add newline between fields except last one
+            if j ~= count then
+              table.insert(nodes, t({ "", "" }))
+            end
+          end
+          return sn(nil, nodes)
+        end, { 1 }),  -- Use first insert node as input for field count
+      }
+    )
+  ),
 }
