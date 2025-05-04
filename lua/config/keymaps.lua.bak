@@ -51,7 +51,7 @@ map("n", "<right>", ":bn<cr>")
 map("n", "H", ":bp<cr>", { noremap = true, silent = true })
 map("n", "L", ":bn<cr>", { noremap = true, silent = true })
 -- <leader><leader> toggles between buffers
-map("n", "<leader><leader>", "<c-^>", { noremap = true, silent = true })
+map("n", "<leader><leader>", "<c-^>")
 map(
   "n",
   "<leader>Lf",
@@ -80,6 +80,9 @@ map("n", "<leader>cv", crates.show_versions_popup, { desc = "Crates: Show Versio
 map("n", "<leader>pf", crates.show_features_popup, { desc = "Crates: Show Features" }) -- Renamed from <leader>cff
 map("n", "<leader>pd", crates.show_dependencies_popup, { desc = "Crates: Show Dependencies" }) -- Renamed from <leader>cdd
 
+map("n", "<leader>cu", crates.update_crate, { desc = "Crates: Update Crate" })
+map("v", "<leader>cu", crates.update_crates, { desc = "Crates: Update Crates (Visual)" })
+map("n", "<leader>c C", crates.update_all_crates, { desc = "Crates: Update All Crates" }) -- Moved from <leader>cc (Note the space)
 map("n", "<leader>cU", crates.upgrade_crate, { desc = "Crates: Upgrade Crate" })
 map("v", "<leader>cU", crates.upgrade_crates, { desc = "Crates: Upgrade Crates (Visual)" })
 map("n", "<leader>pU", crates.upgrade_all_crates, { desc = "Crates: Upgrade All Crates" }) -- Renamed from <leader>cUU
@@ -131,3 +134,83 @@ map("n", "<leader>dv", dap.step_over, { desc = "Debug: Step Over" })
 -- <leader>cd is already mapped to dap.continue
 map("n", "<leader>dC", dap.run_to_cursor, { desc = "Debug: Run To Cursor" }) -- Renamed from <leader>drc
 map("n", "<leader>dK", dap.terminate, { desc = "Debug: Terminate/Kill Session" })
+
+-- Rust (rustaceanvim) specific actions
+map("n", "<leader>rr", function()
+  vim.cmd.RustLsp("runnables")
+end, { desc = "Rust: Runnables" })
+-- <leader>dr is already mapped to Rust Debuggables by LazyVim defaults
+map("n", "<leader>ra", function()
+  vim.cmd.RustLsp("codeAction")
+end, { desc = "Rust: Code Action (Replaces <leader>ca)" })
+map("n", "<leader>re", function()
+  vim.cmd.RustLsp("expandMacro")
+end, { desc = "Rust: Expand Macro" })
+map("n", "<leader>rj", function()
+  vim.cmd.RustLsp("joinLines")
+end, { desc = "Rust: Join Lines" })
+map("n", "<leader>rh", function()
+  vim.cmd.RustLsp("hover")
+end, { desc = "Rust: Hover Actions" })
+map("n", "<leader>rm", function()
+  vim.cmd.RustLsp("parentModule")
+end, { desc = "Rust: Parent Module" })
+map("n", "<leader>rx", function()
+  vim.cmd.RustLsp("ssr")
+end, { desc = "Rust: Structural Search Replace" })
+-- Enhanced SSR keymaps
+map({ "v" }, "<leader>rx", function()
+  -- Get visual selection if in visual mode
+  local selected = ""
+  local mode = vim.api.nvim_get_mode().mode
+  if mode == "v" or mode == "V" then
+    selected = require("rustaceanvim.utils").get_visual_selection()
+  end
+
+  vim.ui.input({
+    prompt = "SSR Pattern: ",
+    default = selected,
+  }, function(pattern)
+    if not pattern then
+      return
+    end
+    vim.ui.input({
+      prompt = "Replacement: ",
+    }, function(replacement)
+      if replacement then
+        vim.cmd.RustLsp("ssr", pattern, replacement)
+      end
+    end)
+  end)
+end, { desc = "Rust: SSR with input" })
+-- <leader>uh is mapped by Snacks to Toggle Inlay Hints
+map("n", "<leader>rd", function()
+  vim.cmd.RustLsp("openDocs")
+end, { desc = "Rust: Open Documentation" })
+
+map("n", "<leader>rD", function()
+  vim.cmd.RustLsp("openCargo")
+end, { desc = "Rust: Open Cargo.toml" })
+
+-- Extras from rustacean tools
+map("n", "<leader>rt", function()
+  local utils = require("rustaceanvim.utils")
+  if utils.is_test_file() then
+    vim.cmd.RustLsp("runnables")
+  else
+    vim.notify("Not a test file", vim.log.levels.WARN)
+  end
+end, { desc = "Run relevant tests" })
+map("n", "<leader>cc", function()
+  local cargo_dir = require("rustaceanvim.utils").get_cargo_manifest_dir()
+  if cargo_dir then
+    vim.cmd("e " .. cargo_dir .. "/Cargo.toml")
+  end
+end, { desc = "Open Cargo.toml" })
+map("n", "<leader>dd", function()
+  local utils = require("rustaceanvim.utils")
+  local config = utils.get_debug_config()
+  if config then
+    require("dap").run(config)
+  end
+end, { desc = "Debug current target" })

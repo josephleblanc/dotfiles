@@ -191,139 +191,185 @@ return {
     fmta( -- Use fmta for placeholders
       [[
 impl Default for <> {
-    fn default() ->> Self { -- Escaped ->> here
+    fn default() ->> Self {
         <>
-    }
+}
+]],
+      {
+        i(1, "TypeName"),
+        i(2, "todo!()"),
+      }
+    )
+  ),
   -- ===== New Error Handling Snippets =====
-  s({
-    trig = ";unwrap",
-    dscr = "unwrap with expect message",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, fmta([[.unwrap_or_else(|<>| panic!("<>", <>))]], {
-    i(1, "e"),
-    i(2, "Error: {}"),
-    r(1),
-  })),
+  s(
+    {
+      trig = ";unwrap",
+      dscr = "unwrap with expect message",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta([[.unwrap_or_else(|<>| panic!("<>", <>))]], {
+      i(1, "e"),
+      i(2, "Error: {}"),
+      r(1),
+    })
+  ),
 
-  s({
-    trig = ";err",
-    dscr = "Custom error type",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, fmta([[
+  s(
+    {
+      trig = ";err",
+      dscr = "Custom error type",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[
 #[derive(Debug, thiserror::Error)]
 enum <> {
     #[error("<>")]
     <>(<>),
 }
-]], {
-  i(1, "Error"),
-  i(2, "error message"),
-  i(3, "Variant"),
-  i(4, "String"),
-})),
+]],
+      {
+        i(1, "Error"),
+        i(2, "error message"),
+        i(3, "Variant"),
+        i(4, "String"),
+      }
+    )
+  ),
 
   -- ===== New Async Patterns =====
-  s({
-    trig = ";spawn",
-    dscr = "Spawn async task",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, fmta([[tokio::spawn(async { <> });]], {
-    i(1),
-  })),
+  s(
+    {
+      trig = ";spawn",
+      dscr = "Spawn async task",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta([[tokio::spawn(async { <> });]], {
+      i(1),
+    })
+  ),
 
   -- ===== New Testing Snippets =====
-  s({
-    trig = ";bench",
-    dscr = "Benchmark test",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, fmta([[
+  s(
+    {
+      trig = ";bench",
+      dscr = "Benchmark test",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[
 #[bench]
 fn <>() {
     <>
 }
-]], {
-  i(1, "bench_name"),
-  i(2),
-})),
+]],
+      {
+        i(1, "bench_name"),
+        i(2),
+      }
+    )
+  ),
 
   -- ===== New Common Traits =====
-  s({
-    trig = ";from",
-    dscr = "From trait implementation",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, fmta([[
+  s(
+    {
+      trig = ";from",
+      dscr = "From trait implementation",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[
 impl From<<>> for <> {
     fn from(value: <>) ->> Self {
         <>
     }
 }
-]], {
-  i(1, "FromType"),
-  i(2, "ToType"),
-  r(1),
-  i(3),
-})),
+]],
+      {
+        i(1, "FromType"),
+        i(2, "ToType"),
+        r(1),
+        i(3),
+      }
+    )
+  ),
 
   -- ===== New Macros =====
-  s({
-    trig = ";vec",
-    dscr = "Vec with capacity",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, fmta([[Vec::with_capacity(<>)<>]], {
-    i(1, "capacity"),
-    i(2),
-  })),
+  s(
+    {
+      trig = ";vec",
+      dscr = "Vec with capacity",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta([[Vec::with_capacity(<>)<>]], {
+      i(1, "capacity"),
+      i(2),
+    })
+  ),
 
   -- ===== New Documentation =====
-  s({
-    trig = ";mod",
-    dscr = "Module documentation",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, fmta([[
+  s(
+    {
+      trig = ";mod",
+      dscr = "Module documentation",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[
 //! <>
 //! 
 //! <>
-]], {
-  i(1, "Module summary"),
-  i(2, "Detailed description"),
-})),
+]],
+      {
+        i(1, "Module summary"),
+        i(2, "Detailed description"),
+      }
+    )
+  ),
 
   -- ===== New Iterator Patterns =====
-  s({
-    trig = ";find",
-    dscr = "Iterator find",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, fmta([[.find(|<>| <>)]], {
-    i(1, "x"),
-    i(2),
-  })),
+  s(
+    {
+      trig = ";find",
+      dscr = "Iterator find",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta([[.find(|<>| <>)]], {
+      i(1, "x"),
+      i(2),
+    })
+  ),
 
   -- ===== New Smart Pointers =====
-  s({
-    trig = ";arc",
-    dscr = "Arc with Mutex",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, fmta([[Arc::new(Mutex::new(<>))]], {
-    i(1),
-  })),
+  s(
+    {
+      trig = ";arc",
+      dscr = "Arc with Mutex",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta([[Arc::new(Mutex::new(<>))]], {
+      i(1),
+    })
+  ),
 
   -- ===== New Serde Patterns =====
   s({
@@ -333,49 +379,6 @@ impl From<<>> for <> {
     priority = 100,
     snippetType = "autosnippet",
   }, t("#[derive(serde::Serialize, serde::Deserialize)]")),
-
-  -- ===== New Builder Pattern =====
-  s({
-    trig = ";builder",
-    dscr = "Builder pattern",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, fmta([[
-impl <> {
-    pub fn builder() ->> <>Builder {
-        <>Builder::default()
-    }
-}
-
-#[derive(Default)]
-pub struct <>Builder {
-    <>
-}
-
-impl <>Builder {
-    pub fn build(self) ->> <> {
-        <>
-    }
-}
-]], {
-  i(1, "Type"),
-  r(1),
-  r(1),
-  r(1),
-  i(2),
-  r(1),
-  r(1),
-  i(3),
-})),
-}
-]],
-      {
-        i(1, "TypeName"), -- Placeholder for the type name
-        i(2, "todo!()"), -- Placeholder for the default implementation body
-      }
-    )
-  ),
 
   -- ===== Lifetime Patterns =====
   s({
@@ -419,19 +422,16 @@ impl <>Builder {
   -- ===== Homomorphic Patterns =====
   s(
     {
-      trig = ";map",
+      trig = ".map ",
       dscr = "Iterator map",
       regTrig = false,
       priority = 100,
       snippetType = "autosnippet",
     },
-    fmta(
-      [[.map(|<>| <>)]],
-      {
-        i(1, "x"),
-        i(2),
-      }
-    )
+    fmta([[.map(|<>| <>)]], {
+      i(1, "x"),
+      i(2),
+    })
   ),
 
   s(
@@ -442,13 +442,10 @@ impl <>Builder {
       priority = 100,
       snippetType = "autosnippet",
     },
-    fmta(
-      [[.and_then(|<>| <>)]],
-      {
-        i(1, "x"),
-        i(2),
-      }
-    )
+    fmta([[.and_then(|<>| <>)]], {
+      i(1, "x"),
+      i(2),
+    })
   ),
 
   s(
@@ -459,13 +456,10 @@ impl <>Builder {
       priority = 100,
       snippetType = "autosnippet",
     },
-    fmta(
-      [[.filter(|<>| <>)]],
-      {
-        i(1, "x"),
-        i(2),
-      }
-    )
+    fmta([[.filter(|<>| <>)]], {
+      i(1, "x"),
+      i(2),
+    })
   ),
 
   s(
@@ -476,14 +470,11 @@ impl <>Builder {
       priority = 100,
       snippetType = "autosnippet",
     },
-    fmta(
-      [[.fold(<>, |<>| <>)]],
-      {
-        i(1, "0"),
-        i(2, "acc, x"),
-        i(3, "acc + x"),
-      }
-    )
+    fmta([[.fold(<>, |<>| <>)]], {
+      i(1, "0"),
+      i(2, "acc, x"),
+      i(3, "acc + x"),
+    })
   ),
 
   -- ===== Iterator Patterns =====
@@ -495,13 +486,10 @@ impl <>Builder {
       priority = 100,
       snippetType = "autosnippet",
     },
-    fmta(
-      [[.collect::<<>><<>>()]],
-      {
-        i(1, "Vec"),
-        i(2, "<T>"),
-      }
-    )
+    fmta([[.collect::<<>><<>>()]], {
+      i(1, "Vec"),
+      i(2, "<T>"),
+    })
   ),
 
   s(
@@ -512,13 +500,10 @@ impl <>Builder {
       priority = 100,
       snippetType = "autosnippet",
     },
-    fmta(
-      [[.partition(|<>| <>)]],
-      {
-        i(1, "x"),
-        i(2),
-      }
-    )
+    fmta([[.partition(|<>| <>)]], {
+      i(1, "x"),
+      i(2),
+    })
   ),
 
   s(
@@ -529,13 +514,10 @@ impl <>Builder {
       priority = 100,
       snippetType = "autosnippet",
     },
-    fmta(
-      [[.take_while(|<>| <>)]],
-      {
-        i(1, "x"),
-        i(2),
-      }
-    )
+    fmta([[.take_while(|<>| <>)]], {
+      i(1, "x"),
+      i(2),
+    })
   ),
 
   s(
@@ -546,13 +528,10 @@ impl <>Builder {
       priority = 100,
       snippetType = "autosnippet",
     },
-    fmta(
-      [[.skip_while(|<>| <>)]],
-      {
-        i(1, "x"),
-        i(2),
-      }
-    )
+    fmta([[.skip_while(|<>| <>)]], {
+      i(1, "x"),
+      i(2),
+    })
   ),
 
   s(
@@ -563,74 +542,56 @@ impl <>Builder {
       priority = 100,
       snippetType = "autosnippet",
     },
-    fmta(
-      [[.zip(<>.into_iter())]],
-      {
-        i(1, "other_iter"),
-      }
-    )
+    fmta([[.zip(<>.into_iter())]], {
+      i(1, "other_iter"),
+    })
   ),
 
-  s(
-    {
-      trig = ";enumerate",
-      dscr = "Add index to iterator",
-      regTrig = false,
-      priority = 100,
-      snippetType = "autosnippet",
-    },
-    t(".enumerate()")
-  ),
+  s({
+    trig = ";enumerate",
+    dscr = "Add index to iterator",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, t(".enumerate()")),
 
-  s(
-    {
-      trig = ";rev",
-      dscr = "Reverse iterator",
-      regTrig = false,
-      priority = 100,
-      snippetType = "autosnippet",
-    },
-    t(".rev()")
-  ),
+  s({
+    trig = ";rev",
+    dscr = "Reverse iterator",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, t(".rev()")),
 
-  s(
-    {
-      trig = ";cycle",
-      dscr = "Cycle iterator endlessly",
-      regTrig = false,
-      priority = 100,
-      snippetType = "autosnippet",
-    },
-    t(".cycle()")
-  ),
+  s({
+    trig = ";cycle",
+    dscr = "Cycle iterator endlessly",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, t(".cycle()")),
 
-  s(
-    {
-      trig = ";peekable",
-      dscr = "Make iterator peekable",
-      regTrig = false,
-      priority = 100,
-      snippetType = "autosnippet",
-    },
-    t(".peekable()")
-  ),
+  s({
+    trig = ";peekable",
+    dscr = "Make iterator peekable",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, t(".peekable()")),
 
-  s(
-    {
-      trig = ";fuse",
-      dscr = "Fuse iterator after first None",
-      regTrig = false,
-      priority = 100,
-      snippetType = "autosnippet",
-    },
-    t(".fuse()")
-  ),
+  s({
+    trig = ";fuse",
+    dscr = "Fuse iterator after first None",
+    regTrig = false,
+    priority = 100,
+    snippetType = "autosnippet",
+  }, t(".fuse()")),
 
   -- ===== Functional Patterns =====
   -- ===== Functional Patterns =====
   s(
     {
-      trig = ";map_or",
+      trig = ".mor ",
       dscr = "Option/Result map_or",
       regTrig = false,
       priority = 100,
@@ -645,17 +606,21 @@ impl <>Builder {
 
   s(
     {
-      trig = ";map_or_else",
+      trig = ".moe ",
       dscr = "Option/Result map_or_else",
       regTrig = false,
       priority = 100,
       snippetType = "autosnippet",
     },
-    fmta([[.map_or_else(|| <>, |<>| <>)]], {
-      i(1, "default"),
-      i(2, "x"),
-      i(3),
-    })
+    fmta(
+      [[.map_or_else(|| <>, 
+    |<>| <>)]],
+      {
+        i(1, "default"),
+        i(2, "x"),
+        i(3),
+      }
+    )
   ),
 
   s(
@@ -673,7 +638,7 @@ impl <>Builder {
 
   s(
     {
-      trig = ";flat_map",
+      trig = ".fm ",
       dscr = "Iterator flat_map",
       regTrig = false,
       priority = 100,
@@ -685,7 +650,7 @@ impl <>Builder {
     })
   ),
   s({
-    trig = ".flt ",
+    trig = ".fl ",
     dscr = "Iterator flatten",
     regTrig = false,
     priority = 100,
@@ -706,7 +671,7 @@ impl <>Builder {
 
   s(
     {
-      trig = ";closure",
+      trig = ";clot",
       dscr = "Closure with type annotation",
       regTrig = false,
       priority = 100,
@@ -719,6 +684,22 @@ impl <>Builder {
       i(4),
     })
   ),
+  -- s(
+  --   {
+  --     trig = "([^%a])clo ",
+  --     dscr = "Closure with type annotation",
+  --     regTrig = true,
+  --     priority = 100,
+  --     snippetType = "autosnippet",
+  --   },
+  --   fmta([[|<>| { <> }]], {
+  --     f(function(_, snip)
+  --       return snip.captures[1]
+  --     end),
+  --     i(1, "x"),
+  --     i(2, "todo!()"),
+  --   })
+  -- ),
 
   s(
     {
@@ -741,19 +722,6 @@ impl <>Builder {
     )
   ),
 
-  s(
-    {
-      trig = ";compose",
-      dscr = "Function composition",
-      regTrig = false,
-      priority = 100,
-      snippetType = "autosnippet",
-    },
-    fmta([[.and_then(|<>| <>)]], {
-      i(1, "x"),
-      i(2),
-    })
-  ),
   s(
     {
       trig = ";match_guard",
@@ -824,7 +792,7 @@ impl <>Builder {
 
   s(
     {
-      trig = ";iflet",
+      trig = "iflet",
       dscr = "if let pattern",
       regTrig = false,
       priority = 100,
@@ -846,7 +814,7 @@ impl <>Builder {
 
   s(
     {
-      trig = ";whilelet",
+      trig = "whilelet",
       dscr = "while let pattern",
       regTrig = false,
       priority = 100,
@@ -866,19 +834,19 @@ impl <>Builder {
     )
   ),
 
-  s(
-    { trig = ";an", wordTrig = false, regTrig = true, snippetType = "autosnippet" },
-    fmta(
-      [[// ANCHOR: <>
-  <>
-  //ANCHOR_END: <>]],
-      {
-        i(2),
-        d(1, get_visual),
-        r(2),
-      }
-    )
-  ),
+  -- s(
+  --   { trig = ";an", wordTrig = false, regTrig = true, snippetType = "autosnippet" },
+  --   fmta(
+  --     [[// ANCHOR: <>
+  -- <>
+  -- //ANCHOR_END: <>]],
+  --     {
+  --       i(2),
+  --       d(1, get_visual),
+  --       r(2),
+  --     }
+  --   )
+  -- ),
   -- Dynamic struct with N fields, using regex capture from trigger ";structN"
   --   Okay, reflecting on the process to arrive at the working dynamic struct snippet, here are the most important rules and principles that proved crucial:
   --
@@ -1222,14 +1190,18 @@ impl <>Builder {
       i(0),
     }
   ),
+
+  s(
+    {
+      trig = ";ltB",
+      dscr = "Lifetime bound (where T: 'a)",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta([[where <>: '<>,]], {
+      i(1, "T"),
+      i(2, "a"),
+    })
+  ),
 }
-  s({
-    trig = ";ltB",
-    dscr = "Lifetime bound (where T: 'a)",
-    regTrig = false,
-    priority = 100,
-    snippetType = "autosnippet",
-  }, fmta([[where <>: '<>,]], {
-    i(1, "T"),
-    i(2, "a"),
-  })),

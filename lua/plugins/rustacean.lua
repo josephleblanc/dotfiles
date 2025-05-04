@@ -106,19 +106,52 @@ return {
       if diagnostics ~= "bacon-ls" then
         base_opts.server = {
           on_attach = function(_, bufnr)
-            -- Your existing keymaps for rust-analyzer features
+            vim.keymap.set(
+              "n",
+              "K", -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
+              function()
+                vim.cmd.RustLsp({ "hover", "actions" })
+              end,
+              { silent = true, buffer = bufnr }
+            )
+            -- Rust (rustaceanvim) specific actions
+            vim.keymap.set("n", "<leader>rr", function()
+              vim.cmd.RustLsp("runnables")
+            end, { desc = "Rust: Runnables" })
+            -- Code Action
             vim.keymap.set("n", "<leader>ra", function()
+              vim.cmd.RustLsp("codeAction")
+            end, { desc = "Rust: Code Action (Replaces <leader>ca)" })
+            -- Grouped Code Action
+            -- :RustLsp expandMacro
+            vim.keymap.set("n", "<leader>re", function()
+              vim.cmd.RustLsp("expandMacro")
+            end, { desc = "Rust: Expand Macro" })
+            vim.keymap.set("n", "<leader>rj", function()
+              vim.cmd.RustLsp("joinLines")
+            end, { desc = "Rust: Join Lines" })
+            vim.keymap.set("n", "<leader>rh", function()
               vim.cmd.RustLsp("hover")
-            end, { desc = "Code Action", buffer = bufnr })
-            vim.keymap.set("n", "<leader>dr", function()
-              vim.cmd.RustLsp("debuggables")
-            end, { desc = "Rust Debuggables", buffer = bufnr })
+            end, { desc = "Rust: Hover Actions" })
+            vim.keymap.set("n", "<leader>rm", function()
+              vim.cmd.RustLsp("parentModule")
+            end, { desc = "Rust: Parent Module" })
+            vim.keymap.set("n", "<leader>rx", function()
+              vim.cmd.RustLsp("ssr")
+            end, { desc = "Rust: Structural Search Replace" })
+            -- <leader>uh is mapped by Snacks to Toggle Inlay Hints
+            vim.keymap.set("n", "<leader>rd", function()
+              vim.cmd.RustLsp("openDocs")
+            end, { desc = "Rust: Open Documentation" })
+            vim.keymap.set("n", "<leader>rD", function()
+              vim.cmd.RustLsp("openCargo")
+            end, { desc = "Rust: Open Cargo.toml" })
           end,
           default_settings = {
             ["rust-analyzer"] = {
               cargo = { allFeatures = true, loadOutDirsFromCheck = true, buildScripts = { enable = true } },
               -- Ensure these are true if rust-analyzer IS the provider
-              checkOnSave = true,
+              checkOnSave = false,
               diagnostics = { enable = true },
               procMacro = {
                 enable = true,
