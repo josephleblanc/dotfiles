@@ -4,19 +4,18 @@ return {
   build = (not LazyVim.is_win())
       and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
     or nil,
-  dependencies = {
-    {
-      "rafamadriz/friendly-snippets",
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-      end,
-    },
-  },
+  -- dependencies table removed, friendly-snippets loaded conditionally below
   config = function()
     -- Load local snippets first
-    -- require("luasnip.loaders.from_lua").lazy_load({
-    --   paths = vim.fn.stdpath("config") .. "/LuaSnips",
-    -- })
+    require("luasnip.loaders.from_lua").lazy_load({
+      paths = vim.fn.stdpath("config") .. "/LuaSnips", -- Ensure this path points correctly to your LuaSnips directory
+    })
+
+    -- Load snippets from friendly-snippets AFTER your custom ones
+    -- so your snippets can override them if needed.
+    if LazyVim.has("friendly-snippets") then
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end
 
     require("luasnip").config.setup({
       update_events = "TextChanged,TextChangedI",
