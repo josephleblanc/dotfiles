@@ -3,6 +3,8 @@
 -- Add any additional options here
 local opt = vim.opt
 
+-- vim.g.lazyvim_rust_diagnostics = "bacon-ls"
+vim.g.lazyvim_rust_diagnostics = "rust-analyzer"
 -- Leave existing settings, add:
 opt.tabstop = 4
 opt.shiftwidth = 4
@@ -13,6 +15,14 @@ opt.history = 1000
 opt.undolevels = 10000
 opt.undoreload = 10000
 
+opt.cmdheight = 1
+opt.showmode = true
+-- Disable LSP inlay hints at the lowest level
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
+  end,
+})
 vim.diagnostic.config({
   virtual_text = false,
 })

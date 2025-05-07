@@ -174,12 +174,12 @@ return {
         namespace = "crates",
       },
       lsp = {
-        enabled = false,
+        enabled = true,
         name = "crates.nvim",
         on_attach = function(client, bufnr) end,
-        actions = false,
-        completion = false,
-        hover = false,
+        actions = true,
+        completion = true,
+        hover = true,
       },
     })
   end,

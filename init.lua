@@ -14,7 +14,27 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
 
 -- settings for bacon-ls
 vim.g.lazyvim_rust_diagnostics = "bacon-ls"
-diagnostics = "bacon-ls"
 
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
+-- default settings
+--
+-- -- Hopefully not needed
+-- require("lsp-endhints").setup({
+--   icons = {
+--     type = "󰜁 ",
+--     parameter = "󰏪 ",
+--     offspec = " ", -- hint kind not defined in official LSP spec
+--     unknown = " ", -- hint kind is nil
+--   },
+--   label = {
+--     truncateAtChars = 20,
+--     padding = 1,
+--     marginLeft = 0,
+--     sameKindSeparator = ", ",
+--   },
+--   extmark = {
+--     priority = 50,
+--   },
+--   autoEnableHints = true,
+-- })

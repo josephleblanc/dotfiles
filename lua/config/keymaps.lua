@@ -5,12 +5,9 @@ local map = vim.keymap.set
 
 -- Add these at the end of existing keymaps
 map("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format code" })
-map("n", "<leader>cd", require("dap").continue, { desc = "Debug: Start/Continue" })
 
 -- search buffers
 map("n", "<leader>;", "<cmd>Buffers<cr>", { desc = "Search buffers" }) -- Added desc
--- quick-save
-map("n", "<leader>w", "<cmd>w<cr>", { desc = "Quick-save" }) -- Fixed options
 
 -- Ctrl+j and Ctrl+k as Esc
 map("n", "<C-j>", "<Esc>")
@@ -52,12 +49,23 @@ map("n", "H", ":bp<cr>", { noremap = true, silent = true })
 map("n", "L", ":bn<cr>", { noremap = true, silent = true })
 -- <leader><leader> toggles between buffers
 map("n", "<leader><leader>", "<c-^>", { noremap = true, silent = true })
-map(
-  "n",
-  "<leader>Lf",
-  ':lua print(vim.inspect(require("luasnip").get_snippet_filetypes()))',
-  { desc = "LuaSnip: Check Filetype" } -- Renamed from <leader>wtl
-)
+-- map(
+--   "n",
+--   "<leader>Lf",
+--   ':lua print(vim.inspect(require("luasnip").get_snippet_filetypes()))',
+--   { desc = "LuaSnip: Check Filetype" } -- Renamed from <leader>wtl
+-- )
+-- Example keymap for unlinking the current snippet
+vim.keymap.set({ "i", "s" }, "<C-e>", function()
+  if require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()] then
+    require("luasnip").unlink_current()
+  else
+    -- If no snippet is active, you could make <C-e> do something else,
+    -- or just make it a no-op in this context.
+    -- For example, to pass the key through if no snippet is active:
+    -- return vim.api.nvim_replace_termcodes("<C-e>", true, false, true)
+  end
+end, { silent = true, expr = false, noremap = true, desc = "LuaSnip Unlink Current" })
 ---- Typst-related
 -- Open doc to watch
 map(
@@ -69,6 +77,12 @@ map(
 -- Typst watches current buffer for changes
 map("n", "<leader>zw", ":TypstWatch<CR>", { noremap = true, silent = true, desc = "TypstWatch" })
 
+vim.keymap.set(
+  "v",
+  "C",
+  [[<Esc>:'<,'>s/\s\+$//e<CR>]],
+  { desc = "Remove trailing whitespace (visual)", noremap = true }
+)
 -- crates.nvim (Note: some keys moved to avoid conflicts)
 local crates = require("crates")
 local opts = { silent = true }
@@ -92,42 +106,3 @@ map("n", "<leader>cR", crates.open_repository, { desc = "Crates: Open Repository
 map("n", "<leader>cD", crates.open_documentation, { desc = "Crates: Open Documentation" })
 map("n", "<leader>cO", crates.open_crates_io, { desc = "Crates: Open Crates.io" }) -- Moved from <leader>cC
 map("n", "<leader>cL", crates.open_lib_rs, { desc = "Crates: Open Lib.rs" })
-
--- Testing (Neotest)
-map("n", "<leader>tt", function()
-  require("neotest").run.run(vim.fn.expand("%"))
-end, { desc = "Test File" })
-map("n", "<leader>tT", function()
-  require("neotest").run.run(vim.loop.cwd())
-end, { desc = "Test All (cwd)" })
-map("n", "<leader>tn", function()
-  require("neotest").run.run()
-end, { desc = "Test Nearest" })
-map("n", "<leader>tO", function()
-  require("neotest").summary.toggle()
-end, { desc = "Test Overview/Summary Toggle" })
-map("n", "<leader>td", function()
-  require("neotest").run.run({ strategy = "dap" })
-end, { desc = "Debug Nearest Test" })
-map("n", "<leader>tA", function()
-  require("neotest").run.attach()
-end, { desc = "Attach to Nearest Test" })
-
--- Debugging (DAP)
-local dap = require("dap")
-map("n", "<leader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
-map("n", "<leader>dB", function()
-  dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-end, { desc = "Debug: Conditional Breakpoint" })
-map("n", "<leader>di", function()
-  dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-end, { desc = "Debug: Insert Log Point" })
-map("n", "<leader>dR", dap.repl.open, { desc = "Debug: Open REPL" }) -- Note: <leader>dr is Rust Debuggables
-map("n", "<leader>dj", dap.down, { desc = "Debug: Stack Down" })
-map("n", "<leader>dk", dap.up, { desc = "Debug: Stack Up" })
-map("n", "<leader>dn", dap.step_into, { desc = "Debug: Step Into" })
-map("n", "<leader>du", dap.step_out, { desc = "Debug: Step Out" })
-map("n", "<leader>dv", dap.step_over, { desc = "Debug: Step Over" })
--- <leader>cd is already mapped to dap.continue
-map("n", "<leader>dC", dap.run_to_cursor, { desc = "Debug: Run To Cursor" }) -- Renamed from <leader>drc
-map("n", "<leader>dK", dap.terminate, { desc = "Debug: Terminate/Kill Session" })

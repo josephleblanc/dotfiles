@@ -16,7 +16,7 @@ return {
       "texlab", -- LaTeX LSP (you might need to install "texlab" or similar separately)
       "marksman", -- Markdown LSP (for README files)
       "pyright",
-      "rust-analyzer",
+      -- "rust-analyzer", -- Mason doesn't do well with rust-analyzer
       "typst-lsp",
 
       -- Debuggers
@@ -24,21 +24,4 @@ return {
       "debugpy",
     },
   },
-
-  -- Rust enhancements
-  -- {
-  --   "simrat39/rust-tools.nvim",
-  --   ft = "rust",
-  --   dependencies = "neovim/nvim-lspconfig",
-  --   config = function()
-  --     require("rust-tools").setup()
-  --   end,
-  --   options = {
-  --     tools = {
-  --       inlay_hints = {
-  --         auto = false,
-  --       },
-  --     },
-  --   },
-  -- },
 }

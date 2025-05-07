@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "typst",
   callback = function()
     vim.opt_local.conceallevel = 2
-    vim.treesitter.stop({ "highlight" }, vim.api.nvim_get_current_buf())
+    -- vim.treesitter.stop({ "highlight" }, vim.api.nvim_get_current_buf())
     -- I think it sets these automatically
     -- vim.bo.expandtab = true
     -- vim.bo.tabstop = 2 -- Add these, since they are common python settings
