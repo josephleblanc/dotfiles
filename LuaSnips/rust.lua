@@ -23,6 +23,101 @@ end
 
 return {
   -- Is my snippets supposed to look like this?
+  -- ===== Temporary Snippets =====
+  s(
+    {
+      trig = ";npa",
+      dscr = "Paranoid Args",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[
+        m.insert("crate::union::<>", ParanoidArgs { 
+            fixture: fixture_name, 
+            relative_file_path: rel_path, 
+            expected_path: &["crate", "union"],
+            ident: "<>", 
+            item_kind: ItemKind::Union,
+            expected_cfg: None,
+        });
+       ]],
+      {
+        i(1, "test_name"),
+        rep(1),
+      }
+    )
+  ),
+  -- s(
+  --   {
+  --     trig = ";npa",
+  --     dscr = "Paranoid Args",
+  --     regTrig = false,
+  --     priority = 100,
+  --     snippetType = "autosnippet",
+  --   },
+  --   fmta(
+  --     [[
+  --       m.insert("crate::type_alias::<>", ParanoidArgs {
+  --           fixture: fixture_name,
+  --           relative_file_path: rel_path,
+  --           expected_path: &["crate", "type_alias"],
+  --           ident: "<>",
+  --           item_kind: ItemKind::TypeAlias,
+  --           expected_cfg: None,
+  --       });
+  --       m.insert("crate::type_alias::<>", ExpectedTypeAliasNode {
+  --           name: "<>",                       // same as key path ending
+  --           visibility: VisibilityKind::<>, // usually Public
+  --           type_id_check: true,            // t/f, hanlde more specific elsewhere
+  --           generic_params_count: <>,       // basic check, more detailed elsehwere
+  --           attributes: vec![<>],           // usually empty, otherwise vec of &'static str
+  --           docstring: <>,                  // usually empty (None)
+  --           tracking_hash_check: true,      // usually true, handle more specific checks in other tests
+  --           cfgs: vec![<>]                  // usually empty
+  --       });
+  --      ]],
+  --     {
+  --       i(1, "test_name"),
+  --       rep(1),
+  --       rep(1),
+  --       rep(1),
+  --       i(2, "Public"),
+  --       i(3, "0"),
+  --       i(4),
+  --       i(5, "None"),
+  --       i(6),
+  --     }
+  --   )
+  -- ),
+  s(
+    {
+      trig = ";ptest",
+      dscr = "Paranoid Test Macro",
+      regTrig = false,
+      priority = 100,
+      snippetType = "autosnippet",
+    },
+    fmta(
+      [[
+paranoid_test_setup!(
+    test_type_alias_<>,
+    "crate::type_alias::<>",
+    EXPECTED_TYPE_ALIASES_ARGS,
+    EXPECTED_TYPE_ALIASES_DATA,
+    syn_parser::parser::nodes::TypeAliasNode,
+    syn_parser::parser::nodes::ExpectedTypeAliasNode,
+    as_type_alias,
+    LOG_TEST_TYPE_ALIAS
+);
+       ]],
+      {
+        i(1, "setup_name"),
+        i(2, "NodeName"),
+      }
+    )
+  ),
   -- ===== Attribute Snippets =====
   s({
     trig = ";rf",
@@ -30,14 +125,14 @@ return {
     regTrig = false,
     priority = 100,
     snippetType = "autosnippet",
-  }, t('#[cfg(feature = "type_bearing_ids")]')),
+  }, t('#[cfg(feature = "multithreaded")]')),
   s({
     trig = ";nrf",
     dscr = "Negative feature cfg attribute",
     regTrig = false,
     priority = 100,
     snippetType = "autosnippet",
-  }, t('#[cfg(not(feature = "type_bearing_ids"))]')),
+  }, t('#[cfg(not(feature = "multithreaded"))]')),
 
   s({
     trig = ";val",

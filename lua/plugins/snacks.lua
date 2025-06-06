@@ -2,51 +2,26 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  ---@type snacks.Config
   opts = {
-    -- This doesn't seem to do anything? Maybe?
-    inlay_hints = { enabled = false },
     explorer = {
       auto_close = true,
-    },
-    picker = {
-      sources = {
-        exporer = {
-          layout = {
-            backdrop = false,
-            width = 80,
-            min_width = 40,
-            height = 0,
-            position = "left",
-            border = "right",
-            box = "horizontal",
-            {
-              box = "vertical",
-              {
-                win = "input",
-                height = 1,
-                width = 0.5,
-                border = "rounded",
-                title = "{title} {live} {flags}",
-                title_pos = "center",
-              },
-              {
-                win = "list",
-                border = "none",
-                width = 0.5,
-              },
-            },
-            {
-              win = "preview",
-              title = "{preview}",
-              width = 0.5,
-              max_width = 40,
-              border = "right",
-            },
-          },
-        },
+      -- Simplify layout to minimum
+      layout = {
+        width = 120,
+        position = "left",
+        border = "single",
       },
-      -- Don't hang around as last open window
     },
+    -- Disable potentially problematic features
+    inlay_hints = { enabled = false },
   },
+  -- Add safety wrapper
+  config = function(_, opts)
+    local ok, snacks = pcall(require, "snacks")
+    if ok then
+      snacks.setup(opts)
+    else
+      vim.notify("Failed to load snacks.nvim", vim.log.levels.ERROR)
+    end
+  end,
 }

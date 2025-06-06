@@ -17,12 +17,21 @@ opt.undoreload = 10000
 
 opt.cmdheight = 1
 opt.showmode = true
+
+-- Attempting to stop snacks.nvim from crashing nvim
+vim.opt.swapfile = false
+vim.opt.undodir = vim.fn.stdpath("state") .. "/undodir"
+vim.opt.undofile = true
+
+-- NOTE: Attempting to stop crashes:
+vim.g.autoformat = true
+
 -- Disable LSP inlay hints at the lowest level
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
-  end,
-})
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   callback = function(args)
+--     vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
+--   end,
+-- })
 vim.diagnostic.config({
   virtual_text = false,
 })

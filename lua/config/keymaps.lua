@@ -3,6 +3,18 @@
 -- Add any additional keymaps here
 local map = vim.keymap.set
 
+-- NOTE: Adding new keymap due to debugging the issues with nvim crashing.
+-- May or may not be temporary.
+-- vim.keymap.set("n", "<leader>rf", function()
+--   vim.lsp.buf.format({ async = true })
+-- end, { desc = "Format Rust file" })
+--
+-- WITH this safer implementation
+vim.keymap.set("n", "<leader>rf", function()
+  -- Use synchronous formatting to avoid race conditions
+  vim.lsp.buf.format({ async = false })
+end, { desc = "Format Rust file" })
+
 -- Add these at the end of existing keymaps
 map("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format code" })
 

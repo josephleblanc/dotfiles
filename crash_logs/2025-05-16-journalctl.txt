@@ -1,0 +1,62 @@
+
+May 16 07:43:21 breakbills-south systemd-coredump[73862]: Process 71376 (nvim) of user 1000 terminated abnormally with signal 6/ABRT, processing...
+May 16 07:43:21 breakbills-south systemd-coredump[73863]: Process 71376 (nvim) of user 1000 dumped core.
+                                                          #4  0x00006307c85c609f n/a (/usr/bin/nvim + 0x4d09f)
+                                                          #5  0x00006307c864c3a3 buf_decor_remove (/usr/bin/nvim + 0xd33a3)
+                                                          #6  0x00006307c87099e7 extmark_del (/usr/bin/nvim + 0x1909e7)
+                                                          #7  0x00006307c8709c57 extmark_del_id (/usr/bin/nvim + 0x190c57)
+                                                          #8  0x00006307c888e801 n/a (/usr/bin/nvim + 0x315801)
+                                                          #9  0x00006307c88915b7 n/a (/usr/bin/nvim + 0x3185b7)
+                                                          #10 0x00006307c8891788 f_sign_unplace (/usr/bin/nvim + 0x318788)
+                                                          #11 0x00006307c8692de7 call_internal_func (/usr/bin/nvim + 0x119de7)
+                                                          #12 0x00006307c86c2a5a call_func (/usr/bin/nvim + 0x149a5a)
+                                                          #13 0x00006307c877ffea nlua_call (/usr/bin/nvim + 0x206fea)
+                                                          #16 0x00006307c876e564 nlua_pcall (/usr/bin/nvim + 0x1f5564)
+                                                          #17 0x00006307c8778cbf n/a (/usr/bin/nvim + 0x1ffcbf)
+                                                          #18 0x00006307c88b21c5 state_handle_k_event (/usr/bin/nvim + 0x3391c5)
+                                                          #19 0x00006307c87e2c41 n/a (/usr/bin/nvim + 0x269c41)
+                                                          #20 0x00006307c87d746d n/a (/usr/bin/nvim + 0x25e46d)
+                                                          #21 0x00006307c88b207d state_enter (/usr/bin/nvim + 0x33907d)
+                                                          #22 0x00006307c87d4cfa normal_enter (/usr/bin/nvim + 0x25bcfa)
+                                                          #23 0x00006307c85cedcd main (/usr/bin/nvim + 0x55dcd)
+                                                          #26 0x00006307c85d1475 _start (/usr/bin/nvim + 0x58475)
+░░ Subject: Process 71376 (nvim) dumped core
+░░ Process 71376 (nvim) crashed and dumped core.
+May 16 07:43:47 breakbills-south systemd-coredump[75308]: Process 73881 (nvim) of user 1000 terminated abnormally with signal 6/ABRT, processing...
+May 16 07:43:47 breakbills-south systemd-coredump[75309]: Process 73881 (nvim) of user 1000 dumped core.
+                                                          #4  0x000064c4af74a09f n/a (/usr/bin/nvim + 0x4d09f)
+                                                          #5  0x000064c4af7d03a3 buf_decor_remove (/usr/bin/nvim + 0xd33a3)
+                                                          #6  0x000064c4af88d9e7 extmark_del (/usr/bin/nvim + 0x1909e7)
+                                                          #7  0x000064c4af88dc57 extmark_del_id (/usr/bin/nvim + 0x190c57)
+                                                          #8  0x000064c4afa12801 n/a (/usr/bin/nvim + 0x315801)
+                                                          #9  0x000064c4afa155b7 n/a (/usr/bin/nvim + 0x3185b7)
+                                                          #10 0x000064c4afa15788 f_sign_unplace (/usr/bin/nvim + 0x318788)
+                                                          #11 0x000064c4af816de7 call_internal_func (/usr/bin/nvim + 0x119de7)
+                                                          #12 0x000064c4af846a5a call_func (/usr/bin/nvim + 0x149a5a)
+                                                          #13 0x000064c4af903fea nlua_call (/usr/bin/nvim + 0x206fea)
+                                                          #16 0x000064c4af8f2564 nlua_pcall (/usr/bin/nvim + 0x1f5564)
+                                                          #17 0x000064c4af8fccbf n/a (/usr/bin/nvim + 0x1ffcbf)
+                                                          #18 0x000064c4afa361c5 state_handle_k_event (/usr/bin/nvim + 0x3391c5)
+                                                          #19 0x000064c4af966c41 n/a (/usr/bin/nvim + 0x269c41)
+                                                          #20 0x000064c4af95b46d n/a (/usr/bin/nvim + 0x25e46d)
+                                                          #21 0x000064c4afa3607d state_enter (/usr/bin/nvim + 0x33907d)
+                                                          #22 0x000064c4af958cfa normal_enter (/usr/bin/nvim + 0x25bcfa)
+                                                          #23 0x000064c4af752dcd main (/usr/bin/nvim + 0x55dcd)
+                                                          #26 0x000064c4af755475 _start (/usr/bin/nvim + 0x58475)
+░░ Subject: Process 73881 (nvim) dumped core
+░░ Process 73881 (nvim) crashed and dumped core.
+May 16 07:46:05 breakbills-south systemd-coredump[77664]: Process 75502 (nvim) of user 1000 terminated abnormally with signal 6/ABRT, processing...
+May 16 07:46:05 breakbills-south systemd-coredump[77665]: Process 75502 (nvim) of user 1000 dumped core.
+                                                          #4  0x000059334eaa309f n/a (/usr/bin/nvim + 0x4d09f)
+                                                          #5  0x000059334ebe8a23 extmark_splice_impl (/usr/bin/nvim + 0x192a23)
+                                                          #6  0x000059334ebe8d6b n/a (/usr/bin/nvim + 0x192d6b)
+                                                          #7  0x000059334eb0b2d9 deleted_lines_mark (/usr/bin/nvim + 0xb52d9)
+                                                          #8  0x000059334eccf12b op_delete (/usr/bin/nvim + 0x27912b)
+                                                          #9  0x000059334ecd78f6 do_pending_operator (/usr/bin/nvim + 0x2818f6)
+                                                          #10 0x000059334ecb44d5 n/a (/usr/bin/nvim + 0x25e4d5)
+                                                          #11 0x000059334ed8f0c6 state_enter (/usr/bin/nvim + 0x3390c6)
+                                                          #12 0x000059334ecb1cfa normal_enter (/usr/bin/nvim + 0x25bcfa)
+                                                          #13 0x000059334eaabdcd main (/usr/bin/nvim + 0x55dcd)
+                                                          #16 0x000059334eaae475 _start (/usr/bin/nvim + 0x58475)
+░░ Subject: Process 75502 (nvim) dumped core
+░░ Process 75502 (nvim) crashed and dumped core.

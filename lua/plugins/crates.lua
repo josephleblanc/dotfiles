@@ -5,8 +5,10 @@ return {
     require("crates").setup({
       smart_insert = true,
       insert_closing_quote = true,
-      autoload = true,
-      autoupdate = true,
+      -- NOTE: Change to try stop the crashes ----------------------
+      autoload = false, -- changed to false
+      autoupdate = false, -- changed to false
+      --------------------------------------------------------------
       autoupdate_throttle = 250,
       loading_indicator = true,
       search_indicator = true,
@@ -14,7 +16,7 @@ return {
       thousands_separator = ".",
       notification_title = "crates.nvim",
       curl_args = { "-sL", "--retry", "1" },
-      max_parallel_requests = 80,
+      max_parallel_requests = 10, -- changed from 80 to 10
       expand_crate_moves_cursor = true,
       enable_update_available_warning = true,
       on_attach = function(bufnr) end,
@@ -174,7 +176,9 @@ return {
         namespace = "crates",
       },
       lsp = {
-        enabled = true,
+        -- NOTE: Change to try stop the crashes ----------------------
+        enabled = false, -- changed to false
+        --------------------------------------------------------------
         name = "crates.nvim",
         on_attach = function(client, bufnr) end,
         actions = true,

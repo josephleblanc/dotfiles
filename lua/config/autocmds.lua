@@ -13,7 +13,6 @@ vim.filetype.add({
     lua = "lua",
   },
 })
-
 -- Autocmds for Python
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",
@@ -44,6 +43,9 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.tabstop = 4
     vim.bo.shiftwidth = 4
     -- Inlay hints are managed by rustaceanvim
+
+    -- NOTE: disable auto-format to help try fix the bugs I'm getting with nvim crashes.
+    vim.b.autoformat = false
   end,
 })
 

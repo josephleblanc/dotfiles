@@ -123,7 +123,7 @@ return {
           },
           cargo = {
             allFeatures = false,
-            loadOutDirsFromCheck = true,
+            loadOutDirsFromCheck = false, -- checking if making this false stops warnings from all directories at once.
             buildScripts = {
               enable = true,
             },
@@ -142,7 +142,7 @@ return {
             enable = true,
           },
           procMacro = {
-            enable = true,
+            enable = true, -- changing to false
             ignored = {
               ["async-trait"] = { "async_trait" },
               ["napi-derive"] = { "napi" },
@@ -167,18 +167,18 @@ return {
     },
   },
   config = function(_, opts)
-    if LazyVim.has("mason.nvim") then
-      local package_path = require("mason-registry").get_package("codelldb"):get_install_path()
-      local codelldb = package_path .. "/extension/adapter/codelldb"
-      local library_path = package_path .. "/extension/lldb/lib/liblldb.dylib"
-      local uname = io.popen("uname"):read("*l")
-      if uname == "Linux" then
-        library_path = package_path .. "/extension/lldb/lib/liblldb.so"
-      end
-      opts.dap = {
-        adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb, library_path),
-      }
-    end
+    -- if LazyVim.has("mason.nvim") then
+    -- local package_path = require("mason-registry").get_package("codelldb"):get_install_path()
+    -- local codelldb = package_path .. "/extension/adapter/codelldb"
+    -- local library_path = package_path .. "/extension/lldb/lib/liblldb.dylib"
+    -- local uname = io.popen("uname"):read("*l")
+    -- if uname == "Linux" then
+    --   library_path = package_path .. "/extension/lldb/lib/liblldb.so"
+    -- end
+    -- opts.dap = {
+    --   adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb, library_path),
+    -- }
+    -- end
     vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
     if vim.fn.executable("rust-analyzer") == 0 then
       LazyVim.error(
