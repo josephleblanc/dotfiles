@@ -6,8 +6,8 @@ return {
       smart_insert = true,
       insert_closing_quote = true,
       -- NOTE: Change to try stop the crashes ----------------------
-      autoload = false, -- changed to false
-      autoupdate = false, -- changed to false
+      autoload = true, -- changed to true
+      autoupdate = true, -- changed to true
       --------------------------------------------------------------
       autoupdate_throttle = 250,
       loading_indicator = true,
@@ -177,7 +177,7 @@ return {
       },
       lsp = {
         -- NOTE: Change to try stop the crashes ----------------------
-        enabled = false, -- changed to false
+        enabled = true, -- changed to true
         --------------------------------------------------------------
         name = "crates.nvim",
         on_attach = function(client, bufnr) end,
