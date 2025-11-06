@@ -32,12 +32,12 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
 vim.g.lazyvim_rust_diagnostics = "bacon-ls"
 
 -- Trying to fix a bug in snacks.explorer.actions that is causing crashes.
-local ok, _ = pcall(function()
-  require("snacks.explorer.actions").fn()
-end)
-if not ok then
-  vim.notify("Snacks operation failed (swap file conflict?)", vim.log.levels.WARN)
-end
+-- local ok, _ = pcall(function()
+--   require("snacks.explorer.actions").fn()
+-- end)
+-- if not ok then
+--   vim.notify("Snacks operation failed (swap file conflict?)", vim.log.levels.WARN)
+-- end
 
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")

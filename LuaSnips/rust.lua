@@ -125,14 +125,14 @@ paranoid_test_setup!(
     regTrig = false,
     priority = 100,
     snippetType = "autosnippet",
-  }, t('#[cfg(feature = "multithreaded")]')),
+  }, t('#[cfg(feature = "llm_refactor")]')),
   s({
     trig = ";nrf",
     dscr = "Negative feature cfg attribute",
     regTrig = false,
     priority = 100,
     snippetType = "autosnippet",
-  }, t('#[cfg(not(feature = "multithreaded"))]')),
+  }, t('#[cfg(not(feature = "llm_refactor"))]')),
 
   s({
     trig = ";val",

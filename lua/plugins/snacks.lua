@@ -7,7 +7,7 @@ return {
       auto_close = true,
       -- Simplify layout to minimum
       layout = {
-        width = 120,
+        width = 30,
         position = "left",
         border = "single",
       },

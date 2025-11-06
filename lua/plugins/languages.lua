@@ -1,6 +1,6 @@
 return {
   -- Language servers and tools
-  "williamboman/mason.nvim",
+  "mason-org/mason.nvim",
   opts = {
     ensure_installed = {
       -- Formatters

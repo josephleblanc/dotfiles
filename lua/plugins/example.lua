@@ -1,7 +1,7 @@
 return {
   -- Configure mini.pairs to disable single quotes in Rust
   {
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.pairs",
     -- Ensure this plugin is enabled (it should be by default if no other autopair plugin is chosen)
     enabled = true,
     opts = function(_, opts)
