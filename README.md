@@ -3,7 +3,15 @@ nvim ftw
 
 ## How To
 
-1. Pull latest from `nvim` to `dotfiles` (this repo):
+1. clone locally (with submodules)
+```bash
+git clone --recurse-submodules git@github.com:josephleblanc/dotfiles.git
+# or, if I forget:
+cd dotfiles
+git submodule update --init --recursive
+```
+
+2. Pull latest from e.g. `nvim` to `dotfiles` (this repo):
 
 ```bash
 cd /path/to/dotfiles
@@ -11,7 +19,7 @@ git subtree pull --prefix nvim git@github.com:josephleblanc/nvim.git main --squa
 git push
 ```
 
-2. Push edits made inside dotfiles/nvim back to the standalone repo
+3. Push edits made inside e.g. dotfiles/nvim back to the standalone repo
 ```bash
 cd /path/to/dotfiles
 git subtree push --prefix nvim git@github.com:josephleblanc/nvim.git main
